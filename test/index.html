@@ -20,14 +20,14 @@
   <style>
     :root{
       /* easy knobs */
-      --avatar: 180px;   /* profile photo size */
-      --ring:   6px;     /* black border thickness */
-      --overlap: 90px;   /* how far avatar overlaps the header */
-      --gap:    10px;    /* fixed space between avatar and name */
+      --avatar: 180px;
+      --ring:   6px;
+      --overlap: 90px;
+      --gap:    10px;
 
       /* compact pills (text-only) */
-      --chip-pad-y: 3px;   /* ← per your current code */
-      --chip-pad-x: 14px;  /* ← per your current code */
+      --chip-pad-y: 3px;
+      --chip-pad-x: 14px;
     }
 
     /* Base */
@@ -41,27 +41,24 @@
     .container{ max-width:700px; margin:0 auto; padding:20px; }
     hr{ border:none; height:1px; background:#000; margin:20px auto; width:100%; }
 
-    /* Header (auto-size: image dictates height) */
+    /* Header (auto-size) */
     .header-wrap{ background:#000; }
     .header-wrap img{ display:block; width:100%; height:auto; }
 
-    /* Avatar + Name stacked (spacing tied to avatar, not header) */
-    .profile-stack{
-      margin-top: calc(-1 * var(--overlap));
-      text-align:center;
-    }
+    /* Avatar + Name */
+    .profile-stack{ margin-top: calc(-1 * var(--overlap)); text-align:center; }
     .profile-stack .avatar{
       width: var(--avatar); height: var(--avatar);
       border-radius:50%; object-fit:cover;
-      border: var(--ring) solid #000;  /* black ring */
+      border: var(--ring) solid #000;
       background:#000; box-shadow: 0 4px 18px rgba(0,0,0,0.25);
     }
     .profile-name{ margin: var(--gap) 0 0 0; font-size: 36px; font-weight: 700; }
 
-    /* Text-only pills (ABOUT / TRAVEL / UPDATES / BLOG) */
+    /* Text-only pills */
     .link-chip-wrap{
       display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
-      margin:12px auto 6px auto; max-width:600px; /* pulled in tighter */
+      margin:12px auto 6px auto; max-width:600px;
     }
     .link-chip{
       display:inline-block;
@@ -81,7 +78,7 @@
     .link-button{
       background-color:#eee; border:2px solid #fff;
       margin:8px auto; padding:5px 5px; width:90%; max-width:600px;
-      box-sizing:border-box;             /* ensures perfect width match */
+      box-sizing:border-box; /* ensures perfect width match */
       border-radius:30px;
       display:flex; align-items:center; justify-content:center; gap:10px;
       text-decoration:none; color:#000; font-weight:bold;
@@ -90,15 +87,14 @@
     .link-button img{ width:60px; height:60px; object-fit:cover; border-radius:50%; display:block; margin-right:20px; }
     .link-text{ flex:1; text-align:center; }
 
-    /* Brand trigger (same width as big buttons, BUT height = chips) */
+    /* Brand trigger (unchanged per your request) */
     .link-button.link-compact{
-      padding: 3px 13px;  /* ← match chips’ height exactly */
+      padding: 3px 13px;  /* keep as-is */
       gap: 0;
     }
-    /* safety: enforce same width calc on this element */
     #open-brand{ width:90%; max-width:600px; box-sizing:border-box; }
 
-    /* ===== Modals (About, Travel, Updates, Blog, Brand) ===== */
+    /* ===== Modals ===== */
     .modal-overlay{
       position:fixed; inset:0; background:rgba(0,0,0,0.6);
       display:none; align-items:center; justify-content:center; z-index:9999;
@@ -107,10 +103,8 @@
     .modal-window{
       width:min(92vw, 560px); max-height:80vh; background:#fff;
       border-radius:14px; box-shadow:0 10px 30px rgba(0,0,0,0.35);
-      overflow:hidden; display:flex; flex-direction:column;
-      text-align:left;
+      overflow:hidden; display:flex; flex-direction:column; text-align:left;
     }
-    /* black header with white title (restored) */
     .modal-header{
       display:flex; align-items:center; justify-content:space-between;
       padding:12px 16px; background:#000; color:#fff;
@@ -122,19 +116,30 @@
     }
     .modal-body{ padding:14px 16px; overflow:auto; }
 
-    /* Blog modal: fixed window height, internal scroll */
+    /* Blog modal: fixed window height */
     .modal-window.blog-size{ height:70vh; }
     .modal-window.blog-size .modal-body{ overflow:auto; }
 
-    /* Brand form */
+    /* Brand form elements */
     .form-row{ display:flex; flex-direction:column; gap:6px; margin:10px 0; }
-    .modal-input, .modal-textarea{
-      width:100%; border:1px solid #ddd; border-radius:10px; padding:10px 12px; font:inherit;
+    .modal-input, .modal-textarea,
+    .form-row input, .form-row textarea{
+      width:100%; border:1px solid #ddd; border-radius:10px; padding:10px 12px; font:inherit; box-sizing:border-box;
     }
-    .modal-textarea{ min-height:140px; resize:vertical; }
+    .modal-textarea, .form-row textarea{ min-height:140px; resize:vertical; }
     .modal-actions{ display:flex; justify-content:flex-end; gap:10px; padding:10px 16px 16px; }
     .btn{ border:none; border-radius:22px; padding:10px 16px; font-weight:700; cursor:pointer; }
     .btn-primary{ background:#111; color:#fff; }
+
+    /* Inline field errors */
+    .field-error{ color:#c83939; font-size:12px; margin-top:6px; min-height:14px; }
+
+    /* Toast mini-modals (Success / Error) matching style */
+    .toast{ position:fixed; left:50%; top:18%; transform:translateX(-50%); z-index:10000;
+      background:#fff; border:2px solid #000; border-radius:12px; width:min(92vw,520px); overflow:hidden; display:none; }
+    .toast.open{ display:block; }
+    .toast .toast-head{ background:#000; color:#fff; padding:10px 14px; font-weight:700; }
+    .toast .toast-body{ padding:14px; }
 
     /* Mobile tweaks */
     @media (max-width:640px){
@@ -218,7 +223,7 @@
       <div class="link-text">🎥 Creators Hit Me Up 🎬<br>@nextdoorrobert</div>
     </a>
 
-    <!-- Brand inquiries trigger (same width, height = chips 3px/14px) -->
+    <!-- Brand inquiries trigger (unchanged text & padding per your request) -->
     <a class="link-button link-compact" href="#" id="open-brand">
       <div class="link-text">BRAND INQUIRES (CLICK HERE)</div>
     </a>
@@ -265,7 +270,7 @@
     </div>
   </div>
 
-  <!-- Travel Dates Modal (auto-close on scroll) -->
+  <!-- Travel Dates Modal -->
   <div class="modal-overlay" id="travel-modal" aria-hidden="true" role="dialog" aria-labelledby="travel-title">
     <div class="modal-window">
       <div class="modal-header">
@@ -293,7 +298,7 @@
     </div>
   </div>
 
-  <!-- Blog Modal (fixed window height, internal scroll; no auto-close on scroll) -->
+  <!-- Blog Modal -->
   <div class="modal-overlay" id="blog-modal" aria-hidden="true" role="dialog" aria-labelledby="blog-title">
     <div class="modal-window blog-size">
       <div class="modal-header">
@@ -316,20 +321,47 @@
         <button class="modal-close" data-close="brand" aria-label="Close">×</button>
       </div>
       <div class="modal-body">
-        <div class="form-row">
-          <label for="brand-subject">Subject</label>
-          <input class="modal-input" id="brand-subject" type="text" placeholder="Hit me with your best shot" />
-        </div>
-        <div class="form-row">
-          <label for="brand-body">Message</label>
-          <textarea class="modal-textarea" id="brand-body" placeholder="Will daddy approve? 😜"></textarea>
-        </div>
-      </div>
-      <div class="modal-actions">
-        <button class="btn btn-primary" id="brand-send">Send</button>
+        <!-- BRAND INQUIRIES FORM (3 required fields) -->
+        <form id="brand-form" novalidate>
+          <div class="form-row">
+            <label for="brand-email">ENTER YOUR EMAIL:</label>
+            <input class="modal-input" type="email" id="brand-email" name="email" placeholder="How do I contact you?" required>
+            <div class="field-error" id="brand-email-error" aria-live="polite"></div>
+          </div>
+          <div class="form-row">
+            <label for="brand-name">YOUR NAME:</label>
+            <input class="modal-input" type="text" id="brand-name" name="name" placeholder="Who are you?" required>
+            <div class="field-error" id="brand-name-error" aria-live="polite"></div>
+          </div>
+          <div class="form-row">
+            <label for="brand-body">MESSAGE:</label>
+            <textarea class="modal-textarea" id="brand-body" name="message" placeholder="Will Daddy Approve?" required></textarea>
+            <div class="field-error" id="brand-message-error" aria-live="polite"></div>
+          </div>
+
+          <!-- Honeypot (hidden) -->
+          <input type="text" id="brand-website" name="website" style="display:none" tabindex="-1" autocomplete="off">
+
+          <div class="modal-actions">
+            <button type="button" class="btn btn-primary" id="brand-send">Send</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+
+  <!-- Toasts (Success / Error) -->
+  <div class="toast" id="toast-success" role="status" aria-live="polite">
+    <div class="toast-head">Success</div>
+    <div class="toast-body">All sent! Daddy Approved™</div>
+  </div>
+  <div class="toast" id="toast-error" role="alert" aria-live="assertive">
+    <div class="toast-head">Error</div>
+    <div class="toast-body">Oops… something went wrong. Try again later 😉</div>
+  </div>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
   <!-- JS -->
   <script>
@@ -391,13 +423,88 @@
       window.addEventListener('touchmove', closeOnce, {once:true, passive:true});
     }
 
-    // Brand send => mailto
-    $('#brand-send')?.addEventListener('click', () => {
-      const to   = 'guynextdoorrobert@gmail.com';
-      const subj = encodeURIComponent($('#brand-subject').value || 'Hit me with your best shot');
-      const body = encodeURIComponent($('#brand-body').value || 'Will daddy approve? 😜');
-      window.location.href = `mailto:${to}?subject=${subj}&body=${body}`;
-      closeModal($('#brand-modal'));
+    /* ===== EmailJS wiring for Brand form ===== */
+    emailjs.init('T8rMf0_OwPMouTkTS'); // your PUBLIC key
+
+    const brandForm   = $('#brand-form');
+    const btnSend     = $('#brand-send');
+    const nameEl      = $('#brand-name');
+    const emailEl     = $('#brand-email');
+    const msgEl       = $('#brand-body');
+    const hpEl        = $('#brand-website');
+
+    const errEmail    = $('#brand-email-error');
+    const errName     = $('#brand-name-error');
+    const errMsg      = $('#brand-message-error');
+
+    const toastOK     = $('#toast-success');
+    const toastErr    = $('#toast-error');
+
+    const emailRegex  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function showToast(el){
+      el.classList.add('open');
+      setTimeout(()=> el.classList.remove('open'), 2500);
+    }
+
+    function setBusy(b){
+      btnSend.disabled = b;
+      btnSend.textContent = b ? 'Sending…' : 'Send';
+    }
+
+    function clearErrors(){
+      [errEmail, errName, errMsg].forEach(el => { if (el) el.textContent = ''; });
+    }
+
+    btnSend?.addEventListener('click', async () => {
+      clearErrors();
+
+      const name = (nameEl?.value || '').trim();
+      const email = (emailEl?.value || '').trim();
+      const message = (msgEl?.value || '').trim();
+
+      let valid = true;
+
+      if (!email || !emailRegex.test(email)) {
+        if (errEmail) errEmail.textContent = 'you forgot this, how annoying!';
+        valid = false;
+      }
+      if (!name) {
+        if (errName) errName.textContent = 'you forgot this, how annoying!';
+        valid = false;
+      }
+      if (!message) {
+        if (errMsg) errMsg.textContent = 'you forgot this, how annoying!';
+        valid = false;
+      }
+      if (!valid) return;
+
+      // honeypot
+      if (hpEl && hpEl.value) return;
+
+      setBusy(true);
+      try {
+        await emailjs.send('service_mop8a5f','template_kwqcoae', {
+          name: name,
+          email: email,
+          message: message
+        });
+
+        // Success UX
+        brandForm?.reset();
+        const brandModal = $('#brand-modal');
+        if (brandModal) {
+          brandModal.classList.remove('open');
+          document.documentElement.style.overflow = '';
+          document.body.style.overflow = '';
+        }
+        showToast(toastOK);
+      } catch (e){
+        console.error(e);
+        showToast(toastErr);
+      } finally {
+        setTimeout(()=> setBusy(false), 4000); // brief rate-limit
+      }
     });
   })();
   </script>
