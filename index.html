@@ -28,13 +28,13 @@
       position: relative;
       width: 100%;
       overflow: hidden;
-      background: #000; /* prevents white flash while image loads */
+      background: #000; /* fallback color */
     }
 
     .header-banner {
       width: 100%;
-      height: 500px; /* adjust this to show more or less of your header image */
-      background-image: url('header-photo.jpg'); /* replace with your banner image */
+      height: 600px; /* taller to show more of the image */
+      background-image: url('header-photo.jpeg'); /* must match your file exactly */
       background-size: cover;
       background-position: center top;
     }
@@ -42,20 +42,20 @@
     .header-pic {
       position: absolute;
       left: 50%;
-      bottom: -80px;                /* how much it overlaps into the content area */
+      bottom: -100px;             /* overlap into content */
       transform: translateX(-50%);
-      width: 160px;
-      height: 160px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
       object-fit: cover;
-      border: 5px solid #000;       /* black ring */
+      border: 6px solid #000;     /* black ring */
       background: #000;
       box-shadow: 0 4px 18px rgba(0,0,0,0.25);
     }
 
     /* Spacer so content clears the overlapping avatar */
     .spacer {
-      height: 100px;
+      height: 140px;
     }
 
     h1 {
