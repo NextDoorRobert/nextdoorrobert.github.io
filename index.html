@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,32 +16,65 @@
       text-align: center;
       color: #000;
     }
+
     .container {
       max-width: 700px;
       margin: 0 auto;
       padding: 20px;
     }
-    .profile-pic {
-      width: 120px;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin: 0 auto 20px;
+
+    /* --- Twitter-style banner with centered profile pic --- */
+    .header-wrap {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      background: #000; /* prevents white flash while image loads */
     }
+
+    .header-banner {
+      width: 100%;
+      height: 500px; /* adjust this to show more or less of your header image */
+      background-image: url('header-photo.jpg'); /* replace with your banner image */
+      background-size: cover;
+      background-position: center top;
+    }
+
+    .header-pic {
+      position: absolute;
+      left: 50%;
+      bottom: -80px;                /* how much it overlaps into the content area */
+      transform: translateX(-50%);
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #000;       /* black ring */
+      background: #000;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+    }
+
+    /* Spacer so content clears the overlapping avatar */
+    .spacer {
+      height: 100px;
+    }
+
     h1 {
       margin: 0;
     }
+
     .icons {
       display: flex;
       justify-content: center;
       gap: 20px;
       margin: 15px 0;
     }
+
     .icons img {
       width: 60px;
       height: 60px;
       border-radius: 50%;
     }
+
     .link-button {
       background-color: #eee;
       border: 2px solid #fff;
@@ -59,6 +91,7 @@
       color: #000;
       font-weight: bold;
     }
+
     .link-button img {
       width: 60px;
       height: 60px;
@@ -66,6 +99,7 @@
       border-radius: 50%;
       margin-right: 20px;
     }
+
     .link-text {
       flex: 1;
       text-align: center;
@@ -73,16 +107,22 @@
   </style>
 </head>
 <body>
-  
+
+  <!-- Twitter-style header -->
+  <div class="header-wrap">
+    <div class="header-banner"></div>
+    <img class="header-pic" src="profile-icon.jpeg" alt="Profile Picture">
+  </div>
+  <div class="spacer"></div>
+
   <div class="container">
-    <img src="profile-icon.jpeg" alt="Profile Picture" class="profile-pic">
     <h1>Robert Does</h1>
     <p>Los Angeles Based Guy Next Door. Daddy-Approved™<br>
-    Upcoming trip: 🌴Palm Springs☀️Aug 28 – Sep 4</p>
+    Upcoming trip: 🌴Palm Springs☀️ Aug 28 – Sep 4</p>
 
     <hr style="border: none; height: 1px; background-color: #000; margin: 20px auto; width: 100%;">
 
-    <!-- AD #1: FIXED 320x100 -->
+    <!-- AD #1 -->
     <div style="margin: 20px auto; max-width: 320px;">
       <ins class="adsbygoogle"
            style="display:inline-block;width:320px;height:100px"
@@ -99,7 +139,8 @@
       <a href="https://www.paypal.me/RobertDoes"><img src="paypal-icon.jpeg" alt="PayPal"></a>
       <a href="https://cash.app/$RobertDoes"><img src="cashapp-icon.jpeg" alt="CashApp"></a>
     </div>
- <a class="link-button" href="https://linktr.ee/nextdoorrobert">
+
+    <a class="link-button" href="https://linktr.ee/nextdoorrobert">
       <img src="links.png" alt="Linktr">
       <div class="link-text">😉😜 Everything Else 😉😜</div>
     </a>
@@ -114,10 +155,10 @@
     <a class="link-button" href="https://throne.com/nextdoorrobert">
       <img src="throne.png" alt="Throne">
       <div class="link-text">🎁🎁 Spoil Me 🎁🎁</div>
-      </a>
+    </a>
     <a class="link-button" href="https://nextdoorrobert.creator-spring.com">
-      <img src="merch.png" alt=Spring">
-      <div class="link-text"> Oh he has Merch! 👕 </div>
+      <img src="merch.png" alt="Spring">
+      <div class="link-text">Oh he has Merch! 👕</div>
     </a>
     <a class="link-button" href="https://join.plaiir.com/BHhftluH0Ub">
       <img src="plaiir-icon.png" alt="Plaiir">
@@ -126,7 +167,7 @@
 
     <hr style="border: none; height: 1px; background-color: #000; margin: 20px auto; width: 100%;">
 
-    <!-- AD #2: FIXED 320x100 -->
+    <!-- AD #2 -->
     <div style="margin: 40px auto 20px auto; max-width: 320px;">
       <ins class="adsbygoogle"
            style="display:inline-block;width:320px;height:100px"
@@ -139,7 +180,7 @@
 
     <hr style="border: none; height: 1px; background-color: #000; margin: 20px auto; width: 100%;">
 
-    <!-- AD #3: FULLY OPEN, RESPONSIVE -->
+    <!-- AD #3 -->
     <div style="margin: 10px auto 40px auto;">
       <ins class="adsbygoogle"
            style="display:block"
@@ -152,8 +193,6 @@
       </script>
     </div>
 
-<hr style="border: none; height: 1px; background-color: #000; margin: 20px auto; width: 100%;">
-    
   </div>
 </body>
 </html>
