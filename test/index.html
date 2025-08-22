@@ -25,9 +25,9 @@
       --overlap: 90px;   /* how far avatar overlaps the header */
       --gap:    10px;    /* fixed space between avatar and name */
 
-      /* compact pills */
-      --chip-pad-y: 8px;
-      --chip-pad-x: 14px;
+      /* compact pills (text-only) */
+      --chip-pad-y: 3px;   /* ← per your current code */
+      --chip-pad-x: 14px;  /* ← per your current code */
     }
 
     /* Base */
@@ -58,14 +58,14 @@
     }
     .profile-name{ margin: var(--gap) 0 0 0; font-size: 36px; font-weight: 700; }
 
-    /* Text-only pills (compact, no images) */
+    /* Text-only pills (ABOUT / TRAVEL / UPDATES / BLOG) */
     .link-chip-wrap{
       display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
       margin:12px auto 6px auto; max-width:600px; /* pulled in tighter */
     }
     .link-chip{
       display:inline-block;
-      padding: 3px 14px;
+      padding: var(--chip-pad-y) var(--chip-pad-x); /* 3px 14px */
       background:#eee; border:2px solid #fff; border-radius:30px;
       font-weight:bold; text-decoration:none; color:#000;
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
@@ -79,8 +79,10 @@
 
     /* Image + text big buttons */
     .link-button{
-      background-color:#eee; border:2px solid #fff; border-radius:30px;
+      background-color:#eee; border:2px solid #fff;
       margin:8px auto; padding:5px 5px; width:90%; max-width:600px;
+      box-sizing:border-box;             /* ensures perfect width match */
+      border-radius:30px;
       display:flex; align-items:center; justify-content:center; gap:10px;
       text-decoration:none; color:#000; font-weight:bold;
       box-shadow: 0 4px 10px rgba(0,0,0,0.12);
@@ -88,11 +90,13 @@
     .link-button img{ width:60px; height:60px; object-fit:cover; border-radius:50%; margin-right:20px; }
     .link-text{ flex:1; text-align:center; }
 
-    /* Brand trigger (full width like other buttons, but compact height, no image) */
+    /* Brand trigger (same width as big buttons, BUT height = chips) */
     .link-button.link-compact{
-      padding: 10px 14px; /* shorter height, same width */
+      padding: 3px 14px;  /* ← match chips’ height exactly */
       gap: 0;
     }
+    /* safety: enforce same width calc on this element */
+    #open-brand{ width:90%; max-width:600px; box-sizing:border-box; }
 
     /* ===== Modals (About, Travel, Updates, Blog, Brand) ===== */
     .modal-overlay{
@@ -106,7 +110,7 @@
       overflow:hidden; display:flex; flex-direction:column;
       text-align:left;
     }
-    /* restore black header with white title */
+    /* black header with white title (restored) */
     .modal-header{
       display:flex; align-items:center; justify-content:space-between;
       padding:12px 16px; background:#000; color:#fff;
@@ -119,12 +123,8 @@
     .modal-body{ padding:14px 16px; overflow:auto; }
 
     /* Blog modal: fixed window height, internal scroll */
-    .modal-window.blog-size{
-      height:70vh;              /* fixed overall height */
-    }
-    .modal-window.blog-size .modal-body{
-      overflow:auto;            /* scroll inside */
-    }
+    .modal-window.blog-size{ height:70vh; }
+    .modal-window.blog-size .modal-body{ overflow:auto; }
 
     /* Brand form */
     .form-row{ display:flex; flex-direction:column; gap:6px; margin:10px 0; }
@@ -159,7 +159,8 @@
 
   <!-- Intro + compact pills -->
   <div class="container">
-    <p>📍Los Angeles 🙋🏽‍♂️Guy Next Door 🧔🏽‍♂️Daddy-Approved™</p>
+    <p>Los Angeles Based Guy Next Door. Daddy-Approved™<br>
+       Upcoming trip: 🌴 Palm Springs ☀️ Aug 28 – Sep 4</p>
 
     <div class="link-chip-wrap">
       <a class="link-chip" href="#" id="open-about">ABOUT ME 💡</a>
@@ -210,7 +211,7 @@
 
     <a class="link-button" href="https://nextdoorrobert.creator-spring.com">
       <img src="/merch.png" alt="Spring">
-      <div class="link-text">Oh! He has Merch! 👕</div>
+      <div class="link-text">Oh he has Merch! 👕</div>
     </a>
 
     <a class="link-button" href="https://join.plaiir.com/BHhftluH0Ub">
@@ -218,7 +219,7 @@
       <div class="link-text">🎥 Creators Hit Me Up 🎬<br>@nextdoorrobert</div>
     </a>
 
-    <!-- Brand inquiries trigger (full width, compact height, no image) -->
+    <!-- Brand inquiries trigger (same width, height = chips 3px/14px) -->
     <a class="link-button link-compact" href="#" id="open-brand">
       <div class="link-text">FOR BRAND INQUIRES</div>
     </a>
@@ -345,10 +346,10 @@
     function closeModal(el){ el.classList.remove('open'); lock(false); }
 
     // Openers
-    $('#open-about') ?.addEventListener('click', e => { e.preventDefault(); openModal($('#about-modal')); });
+    $('#open-about') ?.addEventListener('click', e => { e.preventDefault(); openModal($('#about-modal')); attachScrollAutoClose($('#about-modal')); });
     $('#open-travel')?.addEventListener('click', e => { e.preventDefault(); openModal($('#travel-modal')); attachScrollAutoClose($('#travel-modal')); });
     $('#open-updates')?.addEventListener('click', e => { e.preventDefault(); openModal($('#updates-modal')); attachScrollAutoClose($('#updates-modal')); });
-    $('#open-blog')   ?.addEventListener('click', e => { e.preventDefault(); openModal($('#blog-modal')); });
+    $('#open-blog')   ?.addEventListener('click', e => { e.preventDefault(); openModal($('#blog-modal')); /* no auto-close on scroll */ });
     $('#open-brand')  ?.addEventListener('click', e => { e.preventDefault(); openModal($('#brand-modal')); });
 
     // Close buttons
