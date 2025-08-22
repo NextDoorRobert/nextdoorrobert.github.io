@@ -5,80 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Robert Does</title>
 
-  <!-- GOOGLE ADSENSE SCRIPT -->
+  <!-- GOOGLE ADSENSE -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5529703940567578" crossorigin="anonymous"></script>
 
+  <!-- GOOGLE ANALYTICS (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0VLVXYJ4LL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-0VLVXYJ4LL');
+  </script>
+
   <style>
-    /* ===== Base ===== */
     :root{
-      --avatar: 180px;   /* profile circle size */
-      --overlap: 95px;   /* how far the circle dips below the banner */
-      --ring: 6px;       /* border thickness (black) */
+      /* easy knobs */
+      --avatar: 180px;   /* profile photo size */
+      --ring:   6px;     /* black border thickness */
+      --overlap: 90px;   /* how far avatar overlaps the header */
+      --gap:    10px;    /* FIXED space between avatar and name */
     }
 
+    /* Base */
     body{
       margin:0;
       font-family: Arial, sans-serif;
       background: linear-gradient(to bottom, #ffffff, #000000);
-      text-align:center;
       color:#000;
+      text-align:center;
     }
-
     .container{
       max-width:700px;
       margin:0 auto;
       padding:20px;
     }
 
-    h1{ margin:0; }
-
-    /* ===== Twitter-style header (auto-size banner) ===== */
-    .header-wrap{
-      position:relative;
-      width:100%;
-      overflow:visible;          /* let avatar hang over */
-      background:#000;           /* fallback while image loads */
-    }
-
-    /* Banner uses a real <img> so height auto-follows the image */
-    .header-banner{ line-height:0; }
-    .header-banner img{
+    /* Header (auto-sizes to image) */
+    .header-wrap{ background:#000; }
+    .header-wrap img{
       display:block;
       width:100%;
-      height:auto;               /* <-- auto height from the image */
+      height:auto;
     }
 
-    /* Centered overlapping profile pic with black ring */
-    .header-pic{
-      position:absolute;
-      left:50%;
-      bottom:calc(-1 * var(--overlap));
-      transform:translateX(-50%);
-      width:var(--avatar);
-      height:var(--avatar);
+    /* Avatar + Name stacked together (spacing tied to avatar) */
+    .profile-stack{
+      margin-top: calc(-1 * var(--overlap)); /* creates overlap over header */
+      text-align:center;
+    }
+    .profile-stack .avatar{
+      width: var(--avatar);
+      height: var(--avatar);
       border-radius:50%;
       object-fit:cover;
-      border:var(--ring) solid #000;   /* black ring */
+      border: var(--ring) solid #000;  /* black ring */
       background:#000;
-      box-shadow:0 4px 18px rgba(0,0,0,0.25);
-      z-index:10;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+    }
+    .profile-name{
+      margin: var(--gap) 0 0 0;        /* fixed distance below avatar */
+      font-size: 36px;
+      font-weight: 700;
     }
 
-    /* Spacer so content starts below the circle */
-    .spacer{
-      height:40px;   /* change this number to whatever gap looks best */
-    }
-
-    /* ===== Icons & link buttons ===== */
+    /* Icons & link buttons */
     .icons{
       display:flex;
       justify-content:center;
       gap:20px;
       margin:15px 0;
     }
-    .icons img{
-      width:60px; height:60px; border-radius:50%;
-    }
+    .icons img{ width:60px; height:60px; border-radius:50%; }
 
     .link-button{
       background-color:#eee;
@@ -95,36 +92,38 @@
     }
     .link-text{ flex:1; text-align:center; }
 
-    /* ===== Mobile tweaks ===== */
+    /* Mobile tweaks */
     @media (max-width:640px){
       :root{
         --avatar: 160px;
-        --overlap: 90px;
+        --overlap: 80px;
+        --gap: 8px;
       }
+      .profile-name{ font-size:30px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Twitter-style header (auto-size) -->
+  <!-- Auto-size header -->
   <div class="header-wrap">
-    <div class="header-banner">
-      <!-- Swap filename if you upload a different banner -->
-      <img src="header-photo.jpeg" alt="Header banner">
-    </div>
-    <img class="header-pic" src="profile-icon.jpeg" alt="Profile picture">
+    <img src="header-photo.jpeg" alt="Header banner">
   </div>
-  <div class="spacer"></div>
 
-  <!-- Your content -->
+  <!-- Avatar + Name as one unit (consistent spacing) -->
+  <div class="profile-stack">
+    <img class="avatar" src="profile-icon.jpeg" alt="Profile picture">
+    <h1 class="profile-name">Robert Does</h1>
+  </div>
+
+  <!-- Page content -->
   <div class="container">
-    <h1>Robert Does</h1>
     <p>Los Angeles Based Guy Next Door. Daddy-Approved™<br>
        Upcoming trip: 🌴Palm Springs☀️ Aug 28 – Sep 4</p>
 
     <hr style="border:none;height:1px;background-color:#000;margin:20px auto;width:100%;">
 
-    <!-- AD #1 -->
+    <!-- AD #1: FIXED 320x100 -->
     <div style="margin:20px auto;max-width:320px;">
       <ins class="adsbygoogle"
            style="display:inline-block;width:320px;height:100px"
@@ -167,7 +166,7 @@
 
     <hr style="border:none;height:1px;background-color:#000;margin:20px auto;width:100%;">
 
-    <!-- AD #2 -->
+    <!-- AD #2: FIXED 320x100 -->
     <div style="margin:40px auto 20px;max-width:320px;">
       <ins class="adsbygoogle"
            style="display:inline-block;width:320px;height:100px"
@@ -178,7 +177,7 @@
 
     <hr style="border:none;height:1px;background-color:#000;margin:20px auto;width:100%;">
 
-    <!-- AD #3 -->
+    <!-- AD #3: RESPONSIVE -->
     <div style="margin:10px auto 40px;">
       <ins class="adsbygoogle"
            style="display:block"
@@ -189,5 +188,6 @@
       <script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>
     </div>
   </div>
+
 </body>
 </html>
