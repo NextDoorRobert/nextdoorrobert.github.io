@@ -468,15 +468,38 @@
       if (hpEl && hpEl.value) return;
 
       setBusy(true);
-      try {
-        const res = await fetch(ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type':'application/json' },
-          body: JSON.stringify({ name, email, message })
-        });
-        const data = await res.json().catch(()=>({ok:false}));
+<!-- inside your <script> at the bottom -->
+    btnSend?.addEventListener('click', async () => {
+      clearErrors();
 
-        if (res.ok && data.ok){
+      const name = (nameEl?.value || '').trim();
+      const email = (emailEl?.value || '').trim();
+      const message = (msgEl?.value || '').trim();
+
+      let valid = true;
+      if (!email || !emailRegex.test(email)) { errEmail.textContent = 'you forgot this, how annoying!'; valid = false; }
+      if (!name) { errName.textContent = 'you forgot this, how annoying!'; valid = false; }
+      if (!message) { errMsg.textContent = 'you forgot this, how annoying!'; valid = false; }
+      if (!valid) return;
+
+      // honeypot
+      if (hpEl && hpEl.value) return;
+
+      setBusy(true);
+      try {
+        // ✅ send as FormData instead of JSON
+        const fd = new FormData();
+        fd.append('name', name);
+        fd.append('email', email);
+        fd.append('message', message);
+
+        const res = await fetch(ENDPOINT, { method: 'POST', body: fd });
+        let ok = false;
+        if (res.ok) {
+          try { ok = !!(await res.json()).ok; } catch { ok = true; }
+        }
+
+        if (ok){
           brandForm?.reset();
           const m = $('#brand-modal');
           if (m){ m.classList.remove('open'); document.documentElement.style.overflow=''; document.body.style.overflow=''; }
@@ -484,6 +507,13 @@
         } else {
           showToast(toastErr);
         }
+      } catch (e){
+        console.error(e);
+        showToast(toastErr);
+      } finally {
+        setTimeout(()=> setBusy(false), 3500);
+      }
+    });
       } catch (e){
         showToast(toastErr);
       } finally {
