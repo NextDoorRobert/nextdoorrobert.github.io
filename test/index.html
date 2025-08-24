@@ -129,6 +129,40 @@
   background: #eee;
   transform: scale(1.03);
 }
+
+.button-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 700px;
+  margin: -45px auto 20px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.button-left, .button-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chip {
+  background: #fff;
+  color: #000;
+  font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 24px;
+  border: 2px solid black;
+  text-decoration: none;
+  font-size: 13px;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.chip:hover {
+  background: #eee;
+}
     
   </style>
 </head>
@@ -138,17 +172,17 @@
       <img src="banner.jpg" alt="Banner" class="banner-img">
     </div>
 
-    <!-- 4-Button Grid Row -->
-    <div class="button-grid">
-      <div class="button-left">
-        <a href="#about-modal" class="chip">ABOUT ME</a>
-        <a href="#updates-modal" class="chip">UPDATES / NEWS</a>
-      </div>
-      <div class="button-right">
-        <a href="#blog-modal" class="chip">BLOG</a>
-        <a href="#travel-modal" class="chip">TRAVEL DATES ✈️</a>
-      </div>
-    </div>
+<!-- 4-Button Grid Row -->
+<div class="button-grid">
+  <div class="button-left">
+    <a href="#about-modal" class="chip">ABOUT ME</a>
+    <a href="#updates-modal" class="chip">UPDATES / NEWS</a>
+  </div>
+  <div class="button-right">
+    <a href="#blog-modal" class="chip">BLOG</a>
+    <a href="#travel-modal" class="chip">TRAVEL DATES ✈️</a>
+  </div>
+</div>
 
     <!-- Profile Image (centered overlapping banner) -->
     <div class="profile-pic-wrapper">
