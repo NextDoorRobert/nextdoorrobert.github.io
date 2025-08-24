@@ -91,6 +91,45 @@
       .profile-name{ font-size:30px; }
       .link-chip{ font-size:14px; }
     }
+
+.link-chip-columns {
+  display: flex;
+  justify-content: space-between;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.link-chip-col-left,
+.link-chip-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.link-chip-col-left {
+  align-items: flex-start;
+}
+
+.link-chip-col-right {
+  align-items: flex-end;
+}
+
+.link-chip {
+  background: white;
+  color: black;
+  font-weight: bold;
+  padding: 10px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  border: 1px solid black;
+  transition: all 0.2s ease-in-out;
+}
+
+.link-chip:hover {
+  background: #eee;
+  transform: scale(1.03);
+}
+    
   </style>
 </head>
 <body>
@@ -104,12 +143,16 @@
     <p style="font-size:16px;">📍Los Angeles 🧔🏽‍♂️Guy Next Door <br>💯Daddy-Approved™</p>
 
     <!-- 2x2 Button Grid -->
-    <div class="button-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-width: 400px; margin: 20px auto;">
-      <a class="link-chip" href="#" id="open-about">ABOUT ME 💡</a>
-      <a class="link-chip" href="#" id="open-travel">TRAVEL DATES ✈️</a>
-      <a class="link-chip" href="#" id="open-updates">UPDATES / NEWS</a>
-      <a class="link-chip" href="#" id="open-blog">BLOG</a>
-    </div>
+  <div class="link-chip-columns">
+  <div class="link-chip-col-left">
+    <a class="link-chip" href="#" id="open-about">ABOUT ME 💡</a>
+    <a class="link-chip" href="#" id="open-updates">UPDATES / NEWS</a>
+  </div>
+  <div class="link-chip-col-right">
+    <a class="link-chip" href="#" id="open-blog">BLOG</a>
+    <a class="link-chip" href="#" id="open-travel">TRAVEL DATES ✈️</a>
+  </div>
+</div>
 
     <hr>
 
