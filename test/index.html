@@ -65,7 +65,14 @@
     .btn-primary{ background:#111; color:#fff; }
 
     .field-error{ color:#c83939; font-size:12px; margin-top:6px; min-height:14px; }
+.profile-name {
+  margin-bottom: 4px;
+}
 
+.container p {
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
     .toast{ position:fixed; left:50%; top:18%; transform:translateX(-50%); z-index:10000; background:#fff; border:2px solid #000; border-radius:12px; width:min(92vw,520px); overflow:hidden; display:none; }
     .toast.open{ display:block; }
     .toast .toast-head{ background:#000; color:#fff; padding:10px 14px; font-weight:700; }
@@ -311,11 +318,11 @@
     function openModal(el){ el.classList.add('open'); lock(true); }
     function closeModal(el){ el.classList.remove('open'); lock(false); }
 
-    $('#open-about') ?.addEventListener('click', e => { e.preventDefault(); openModal($('#about-modal')); });
+    $('#open-about')?.addEventListener('click', e => { e.preventDefault(); openModal($('#about-modal')); });
     $('#open-travel')?.addEventListener('click', e => { e.preventDefault(); openModal($('#travel-modal')); });
     $('#open-updates')?.addEventListener('click', e => { e.preventDefault(); openModal($('#updates-modal')); });
-    $('#open-blog')   ?.addEventListener('click', e => { e.preventDefault(); openModal($('#blog-modal')); });
-    $('#open-brand')  ?.addEventListener('click', e => { e.preventDefault(); openModal($('#brand-modal')); });
+    $('#open-blog')?.addEventListener('click', e => { e.preventDefault(); openModal($('#blog-modal')); });
+    $('#open-brand')?.addEventListener('click', e => { e.preventDefault(); openModal($('#brand-modal')); });
 
     $$('.modal-close').forEach(btn => {
       btn.addEventListener('click', () => {
