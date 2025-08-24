@@ -118,7 +118,7 @@
   background: white;
   color: black;
   font-weight: bold;
-  padding: 10px 16px;
+  padding: 8px 10px;
   border-radius: 20px;
   text-decoration: none;
   border: 1px solid black;
@@ -133,31 +133,34 @@
   </style>
 </head>
 <body>
-  <div class="header-wrap">
-    <img src="/header-photo.jpeg" alt="Header banner">
-  </div>
-
-  <!-- MODAL BUTTON GRID — JUST BELOW HEADER -->
-  <div style="display: flex; justify-content: space-between; flex-wrap: wrap; max-width: 500px; margin: -30px auto 20px; padding: 0 20px;">
-    <div style="display: flex; flex-direction: column; gap: 10px;">
-      <a class="link-chip" href="#" id="open-about">ABOUT ME</a>
-      <a class="link-chip" href="#" id="open-updates">UPDATES / NEWS</a>
-    </div>
-    <div style="display: flex; flex-direction: column; gap: 10px; align-items: flex-end;">
-      <a class="link-chip" href="#" id="open-blog">BLOG</a>
-      <a class="link-chip" href="#" id="open-travel">TRAVEL DATES ✈️</a>
-    </div>
-  </div>
-
-  <!-- PROFILE IMAGE + NAME -->
-  <div class="profile-stack">
-    <img class="avatar" src="/profile-icon.jpeg" alt="Profile picture">
-    <h1 class="profile-name">Robert Does</h1>
-  </div>
-
   <div class="container">
-    <p style="font-size:16px;">📍Los Angeles 🧔🏽‍♂️Guy Next Door <br>💯Daddy-Approved™</p>
+    <div class="banner">
+      <img src="banner.jpg" alt="Banner" class="banner-img">
+    </div>
 
+    <!-- 4-Button Grid Row -->
+    <div class="button-grid">
+      <div class="button-left">
+        <a href="#about-modal" class="chip">ABOUT ME</a>
+        <a href="#updates-modal" class="chip">UPDATES / NEWS</a>
+      </div>
+      <div class="button-right">
+        <a href="#blog-modal" class="chip">BLOG</a>
+        <a href="#travel-modal" class="chip">TRAVEL DATES ✈️</a>
+      </div>
+    </div>
+
+    <!-- Profile Image (centered overlapping banner) -->
+    <div class="profile-pic-wrapper">
+      <img src="profile.jpg" alt="Robert Does" class="profile-pic">
+    </div>
+
+    <!-- Header Text -->
+    <h1>Robert Does</h1>
+    <p>
+      📍Los Angeles 🧔🏽‍♂️Guy Next Door<br>
+      💯Daddy-Approved™
+    </p>
     <hr>
 
     <!-- Ads block 1 -->
